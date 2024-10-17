@@ -30,7 +30,12 @@ module.exports = function (app) {
       });
     } catch (error) {
       console.error(error);
-      res.json(error.message);
+      if (error.message === "invalid unit") return res.json(error.message);
+      try {
+        convertHandler.getUnit(input);
+      } catch (error) {
+        return res.json("invalid number and unit");
+      }
     }
   });
 };

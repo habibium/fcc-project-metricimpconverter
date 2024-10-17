@@ -70,7 +70,7 @@ function ConvertHandler() {
       km: initNum / miToKm,
     };
 
-    return result[initUnit];
+    return Math.round(result[initUnit] * 100000) / 100000;
   };
 
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {
