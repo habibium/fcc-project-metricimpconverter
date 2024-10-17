@@ -1,6 +1,22 @@
 function ConvertHandler() {
   this.getNum = function (input) {
-    let result;
+    let result = input;
+
+    // If input is not a number, return 1
+    if (!result || !/^\d+/.test(input)) return 1;
+
+    result = input
+      // remove whitespaces
+      ?.replace(/\s+/g, "")
+      // match numbers from the beginning of the string and optionally . or / followed by more numbers
+      ?.match(/^[0-9]+(\.|\/)?([0-9]+)?/);
+
+    // if no match or the input is double or higher fraction e.g. 3/2/3 throw an error
+    if (!Array.isArray(result) || input?.split("/").length > 2)
+      throw new Error("invalid number");
+
+    // calculate the number from the string
+    result = eval(result[0]);
 
     return result;
   };
