@@ -22,9 +22,13 @@ function ConvertHandler() {
   };
 
   this.getUnit = function (input) {
-    let result;
+    const VALID_UNITS = ["gal", "L", "mi", "km", "lbs", "kg"];
+    const unitRegex = new RegExp(`^(${VALID_UNITS.join("|")})$`, "i");
+    let result = input?.match(/\D+$/);
 
-    return result;
+    if (Array.isArray(result) && unitRegex.test(result[0])) return result[0];
+
+    throw new Error("invalid unit");
   };
 
   this.getReturnUnit = function (initUnit) {
