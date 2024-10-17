@@ -32,24 +32,45 @@ function ConvertHandler() {
   };
 
   this.getReturnUnit = function (initUnit) {
-    let result;
+    const unitPairs = {
+      gal: "L",
+      L: "gal",
+      mi: "km",
+      km: "mi",
+      lbs: "kg",
+      kg: "lbs",
+    };
 
-    return result;
+    return unitPairs[initUnit];
   };
 
   this.spellOutUnit = function (unit) {
-    let result;
+    let result = {
+      gal: "gallons",
+      L: "liters",
+      mi: "miles",
+      km: "kilometers",
+      lbs: "pounds",
+      kg: "kilograms",
+    };
 
-    return result;
+    return result[unit];
   };
 
   this.convert = function (initNum, initUnit) {
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
-    let result;
+    let result = {
+      gal: initNum * galToL,
+      L: initNum / galToL,
+      lbs: initNum * lbsToKg,
+      kg: initNum / lbsToKg,
+      mi: initNum * miToKm,
+      km: initNum / miToKm,
+    };
 
-    return result;
+    return result[initUnit];
   };
 
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {
