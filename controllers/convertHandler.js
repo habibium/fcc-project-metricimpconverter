@@ -24,7 +24,7 @@ function ConvertHandler() {
   this.getUnit = function (input) {
     const VALID_UNITS = ["gal", "L", "mi", "km", "lbs", "kg"];
     const unitRegex = new RegExp(`^(${VALID_UNITS.join("|")})$`, "i");
-    let result = input?.match(/\D+$/);
+    let result = input?.match(/[a-zA-Z]+$/);
 
     if (Array.isArray(result) && unitRegex.test(result[0])) return result[0];
 
