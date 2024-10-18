@@ -19,7 +19,7 @@ suite("Unit Tests", function () {
     });
 
     test("convertHandler should correctly read a fractional input with a decimal.", () => {
-      assert.strictEqual(convertHandler.getNum("6 / 10km"), 6 / 10);
+      assert.strictEqual(convertHandler.getNum("2.5/6km"), 2.5 / 6);
     });
 
     test("convertHandler should correctly return an error on a double-fraction (i.e. 3/2/3).", () => {
