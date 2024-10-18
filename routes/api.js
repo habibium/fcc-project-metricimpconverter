@@ -11,7 +11,7 @@ module.exports = function (app) {
 
     try {
       const initNum = convertHandler.getNum(input);
-      const initUnit = convertHandler.getUnit(input);
+      const initUnit = convertHandler.getUnit(input)?.toLowerCase();
       const returnNum = convertHandler.convert(initNum, initUnit);
       const returnUnit = convertHandler.getReturnUnit(initUnit);
       const string = convertHandler.getString(
@@ -21,11 +21,32 @@ module.exports = function (app) {
         returnUnit
       );
 
+      console.log({
+        input,
+        initNum,
+        actualInitUnit: initUnit,
+        initUnit:
+          initUnit === "l" || initUnit === "L" ? "L" : initUnit?.toLowerCase(),
+        returnNum,
+        actualReturnUnit: returnUnit,
+        returnUnit:
+          returnUnit === "l" || returnUnit === "L"
+            ? "L"
+            : returnUnit?.toLowerCase(),
+        string,
+      });
+
       res.json({
         initNum,
-        initUnit,
+        actualInitUnit: initUnit,
+        initUnit:
+          initUnit === "l" || initUnit === "L" ? "L" : initUnit?.toLowerCase(),
         returnNum,
-        returnUnit,
+        actualReturnUnit: returnUnit,
+        returnUnit:
+          returnUnit === "l" || returnUnit === "L"
+            ? "L"
+            : returnUnit?.toLowerCase(),
         string,
       });
     } catch (error) {

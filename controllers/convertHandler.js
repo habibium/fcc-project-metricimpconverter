@@ -35,19 +35,21 @@ function ConvertHandler() {
     const unitPairs = {
       gal: "L",
       L: "gal",
+      l: "gal",
       mi: "km",
       km: "mi",
       lbs: "kg",
       kg: "lbs",
     };
 
-    return unitPairs[initUnit];
+    return unitPairs[initUnit?.toLowerCase()];
   };
 
   this.spellOutUnit = function (unit) {
     let result = {
       gal: "gallons",
       L: "liters",
+      l: "liters",
       mi: "miles",
       km: "kilometers",
       lbs: "pounds",
@@ -64,6 +66,7 @@ function ConvertHandler() {
     let result = {
       gal: initNum * galToL,
       L: initNum / galToL,
+      l: initNum / galToL,
       lbs: initNum * lbsToKg,
       kg: initNum / lbsToKg,
       mi: initNum * miToKm,
