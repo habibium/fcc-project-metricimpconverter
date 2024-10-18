@@ -24,15 +24,9 @@ module.exports = function (app) {
       console.log({
         input,
         initNum,
-        actualInitUnit: initUnit,
-        initUnit:
-          initUnit === "l" || initUnit === "L" ? "L" : initUnit?.toLowerCase(),
+        initUnit,
         returnNum,
-        actualReturnUnit: returnUnit,
-        returnUnit:
-          returnUnit === "l" || returnUnit === "L"
-            ? "L"
-            : returnUnit?.toLowerCase(),
+        returnUnit,
         string,
       });
 
@@ -50,13 +44,16 @@ module.exports = function (app) {
         string,
       });
     } catch (error) {
-      console.error(error);
-      if (error.message === "invalid unit") return res.json(error.message);
-      try {
-        convertHandler.getUnit(input);
-      } catch (error) {
-        return res.json("invalid number and unit");
+      if (error.message === "invalid number") {
+        try {
+          convertHandler.getUnit(input);
+        } catch (error) {
+          return res.json("invalid number and unit");
+        }
+        return res.json(error.message);
       }
+
+      res.json(error.message);
     }
   });
 };
